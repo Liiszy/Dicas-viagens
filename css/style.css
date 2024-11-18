@@ -96,20 +96,9 @@ nav ul a:hover::after {
     color: rgb(255, 255, 255);
     font-weight: 400;
     padding-right: 10px;
-}
-.login-icon::after{
-    content: "";
-    background-color: #ffffff;
-    height: 3px;
-    width: 0%;
-    display: block;
-    margin: 0 auto;
-    transition: 0.3s;
-}
-.login-icon:hover::after{
-    width: 100%;
 
 }
+
 .banner {
     display: flex;
     justify-content: center;
@@ -168,6 +157,28 @@ nav ul a:hover::after {
     transition: ease-in-out 0.4s;
 }
 
+.container {
+    padding: 40px 20px;
+    margin: 0 auto;
+    text-align: justify;
+}
+.content {
+    background-color: #F6F2E8;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    padding: 30px;
+    line-height: 1.6;
+}
+.content h2 {
+    font-size: 2em;
+    margin-top: 0;
+    color: #334A00;
+}
+.content p {
+    margin-bottom: 20px;
+    color: #3b3b39;
+}
+
 /*-------------------------------------------Início Leaf---------------------------------------*/
 
 .leaf {
@@ -179,6 +190,7 @@ nav ul a:hover::after {
     margin:  12px;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top:0px;
     
 }
 .leaf p {
@@ -288,7 +300,6 @@ footer ul a{
     .menu {
         padding: 0 2%;
     }
-
     .fundo {
         min-height: 80px;
     }
@@ -296,12 +307,13 @@ footer ul a{
     header {
         background-size: cover;
     }
-
+    
     nav {
         display: flex;
         flex-direction: column; /* Coloca o conteúdo verticalmente */
         align-items: center; /* Centraliza todos os itens dentro do nav */
     }
+    
 
     .login-icon {
         font-size: 20px; /* Aumenta o tamanho do ícone */
@@ -361,6 +373,29 @@ footer ul a{
         word-wrap: break-word;
         text-align: center;
         margin: 10px 0;
+    }
+
+    .container {
+        padding: 20px 10px;
+    }
+
+    .content {
+        padding: 15px;
+        box-shadow: none; 
+    }
+
+    .content h2 {
+        font-size: 1.5em; 
+        margin: 0;
+        padding: 0; 
+        letter-spacing: normal;
+        align-items: center; 
+    }
+
+    .content p {
+        margin-bottom: 15px;
+        font-size: 14px; 
+        letter-spacing: normal; 
     }
 
 
