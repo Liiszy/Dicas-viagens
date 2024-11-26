@@ -409,7 +409,8 @@ footer ul a{
         font-size: 1.5em; 
         margin: 0;
         padding: 0; 
-        letter-spacing: normal; 
+        letter-spacing: normal;
+        text-align: left;
     }
 
     .content p {
