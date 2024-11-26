@@ -329,7 +329,6 @@ footer ul a{
 
 
 
-
 /*-------------------------------------------Início Responsividade---------------------------------------*/
 
 /* Media Query para telas com no máximo 767px */
@@ -417,7 +416,18 @@ footer ul a{
 
 
         /* ----- Responsividade Contéudo  ----- */
-
+        
+        .post-form {
+            background-color:  #cad3c8;
+                    border: 1px solid  #9ebda4d2;
+                    border-radius: 5px;
+                    padding: 20px; 
+                    margin:  0px;  
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    .response-form-container{
+        align-items: start;
+    }
     .conteinermain {
         padding: 15px;
     }
@@ -427,7 +437,8 @@ footer ul a{
     }
     
     #bv {
-        font-size: 24px;
+        font-size: 21px;
+        text-align: start;
     }
     
     .contentmain p {
@@ -451,10 +462,7 @@ footer ul a{
         font-size: 20px;
     }
     
-    form {
-        padding: 15px;
-        margin: 10px 0;
-    }
+   
     
     form button {
         padding: 8px 12px;
@@ -463,12 +471,10 @@ footer ul a{
     #post-list h3 {
         font-size: 20px;
     }
-    
- }
+}
 
-
-/* Responsividade para telas com min-width: 768px e max-width: 1023px */
-@media screen and (min-width: 768px) and (max-width: 1023px) {
+/* Responsividade para telas com min-width: 768px e max-width: 1024px */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
 
     /* ----- Responsividade Cabeçalho  ----- */
     .menu {
@@ -549,7 +555,9 @@ footer ul a{
     }
 
     /* ----- Responsividade Contéudo  ----- */
-
+    .post-form {
+                margin:  10px;          
+    }
     .conteinermain {
         padding: 20px;
     }
@@ -559,7 +567,8 @@ footer ul a{
     }
 
     #bv {
-        font-size: 28px;
+        font-size: 30px;
+        text-align: start;
     }
 
     .contentmain p {
@@ -581,11 +590,6 @@ footer ul a{
 
     .exp {
         font-size: 22px;
-    }
-
-    form {
-        padding: 15px;
-        margin: 10px;
     }
 
     form button {
@@ -678,4 +682,46 @@ textarea{
 
 .caixa-resposta{
     margin: 10px;
+}
+.response-form-container form {
+    display: flex;
+    flex-direction: column; /* Coloca os elementos na coluna */
+    gap: 10px; /* Espaçamento entre os elementos */
+    align-items: stretch; /* Garante que os botões se alinhem à largura do formulário */
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: flex-start; /* Alinha os botões à esquerda */
+    gap: 10px; /* Espaçamento entre os botões */
+}
+
+.delete-btn, button[type="submit"] {
+    padding: 8px 16px;
+    margin-top: 15px;
+    border-radius: 5px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+
+
+.toggle-responses-btn {
+    background-color: #2a5e33;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.toggle-responses-btn:hover {
+    background: #1a4821;
+}
+.no-comments-message {
+    color:black;
+    font-style: italic;
+    margin-top: 10px;
 }
