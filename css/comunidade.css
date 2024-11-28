@@ -107,18 +107,7 @@ nav ul a:hover::after {
     font-weight: 400;
     padding-right: 10px;
 }
-.login-icon::after{
-    content: "";
-    background-color: #ffffff;
-    height: 3px;
-    width: 0%;
-    display: block;
-    margin: 0 auto;
-    transition: 0.3s;
-}
-.login-icon:hover::after{
-    width: 100%;
-}
+
 .banner {
     display: flex;
     justify-content: center;
