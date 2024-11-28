@@ -4,7 +4,12 @@
   box-sizing: border-box;
   font-family: 'Arial', sans-serif;
 }
-
+.erro {
+  color: red;
+  padding-left: 10px; 
+  background-color: transparent; 
+  font-weight: bold;
+}
 body {
   height: 100vh;
   display: flex;

@@ -25,7 +25,17 @@ p {
     color: #0000009c;
 }
 
+.logged {
 
+    pointer-events: none;
+    cursor: default;
+    font-size: 15px; 
+    margin-left: auto; 
+    color: rgb(255, 255, 255);
+    font-weight: 400;
+    padding-right: 10px;
+
+}
 
 /*-------------------------------------------Início Header---------------------------------------*/
 

@@ -24,6 +24,17 @@ h3 {
 p {
     color: #0000009c;
 }
+.logged {
+
+    pointer-events: none;
+    cursor: default;
+    font-size: 15px; 
+    margin-left: auto; 
+    color: rgb(255, 255, 255);
+    font-weight: 400;
+    padding-right: 10px;
+
+}
 
 
 /*-------------------------------------------Início Header---------------------------------------*/
@@ -100,19 +111,7 @@ nav ul a:hover::after {
     font-weight: 400;
     padding-right: 10px;
 }
-.login-icon::after{
-    content: "";
-    background-color: #ffffff;
-    height: 3px;
-    width: 0%;
-    display: block;
-    margin: 0 auto;
-    transition: 0.3s;
-}
-.login-icon:hover::after{
-    width: 100%;
 
-}
 .banner {
     display: flex;
     justify-content: center;
@@ -386,6 +385,7 @@ footer ul a{
         margin: 0;
         padding: 0; 
         letter-spacing: normal; 
+        text-align: left;
     }
 
     .content p {

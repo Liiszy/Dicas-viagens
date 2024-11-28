@@ -1,5 +1,14 @@
 
 /*-------------------------------------------Tags Gerais---------------------------------------*/
+.erro {
+  margin-top: 15px; /* Espaçamento do h1 */
+  margin-bottom: 10px; /* Espaçamento do input abaixo */
+  text-align: center; /* Centraliza o texto */
+  color: #ff4d4d; /* Vermelho suave para o texto */
+  background-color: transparent; /* Fundo transparente */
+  font-size: 14px; /* Tamanho de fonte moderado */
+  font-weight: 500; /* Peso intermediário */
+}
 
 *{
   margin: 0;
