@@ -83,117 +83,111 @@ document.addEventListener('DOMContentLoaded', () => {
   
   
     // Função para criar um novo elemento de postagem
-    function createPostElement(userName, author, content, index) {
-        const post = document.createElement('article');
-        post.className = 'post';
-    
-        // Estrutura do post
-        post.innerHTML = `
-            <div class="caixa-resposta">
-                <h3>${userName}</h3>
-                <p><strong>Destino:</strong> ${author}</p>
-                <p>${content}</p>
-                <div class="responses-container">
-                    <button class="toggle-responses-btn" data-index="${index}">Mostrar Comentários</button>
-                </div>
-                <div class="responses" id="responses-${index}" style="display: none;">
-                    <p class="no-comments-message" style="display: none;">Este Post ainda não possui nenhum comentário.</p>
-                </div>
-                <div class="button-container">
-                    <button class="reply-btn" data-index="${index}">Responder</button>
-                    <button class="delete-btn" data-index="${index}">Excluir</button>
-                </div>
-                <div class="response-form-container" id="response-form-container-${index}" style="display: none;">
-                    <form class="response-form" data-index="${index}">
-                        <input type="text" class="response-content" placeholder="Escreva uma resposta" required />
-                        <div class="form-buttons">
-                            <button type="submit">Enviar</button>
-                        </div>
-                    </form>
-                </div>
+   // Função para criar um novo elemento de postagem
+function createPostElement(userName, author, content, index) {
+    const post = document.createElement('article');
+    post.className = 'post';
+
+    // Estrutura do post
+    post.innerHTML = `
+        <div class="caixa-resposta">
+            <h3>${userName}</h3>
+            <p><strong>Destino:</strong> ${author}</p>
+            <p>${content}</p>
+            <div class="responses-container">
+                <button class="toggle-responses-btn" data-index="${index}">Mostrar Comentários</button>
             </div>
-        `;
-    
-        // Criação do botão "Excluir"
-        const deleteBtn = post.querySelector('.delete-btn');
-        deleteBtn.addEventListener('click', () => {
-            deletePost(index);
-        });
-    
-        // Coloca o botão "Excluir" ao lado do botão "Responder" inicialmente
-        const buttonContainer = post.querySelector('.button-container');
-        buttonContainer.appendChild(deleteBtn);
-    
-        // Evento do botão "Responder"
-        const replyBtn = post.querySelector('.reply-btn');
-        const responseFormContainer = post.querySelector('.response-form-container');
-        const toggleResponsesBtn = post.querySelector('.toggle-responses-btn');
-        const responsesContainer = post.querySelector('.responses');
-        const noCommentsMessage = responsesContainer.querySelector('.no-comments-message');
-        const formButtons = responseFormContainer.querySelector('.form-buttons');
-    
-        replyBtn.addEventListener('click', () => {
-            const isVisible = responseFormContainer.style.display === 'block';
-            responseFormContainer.style.display = isVisible ? 'none' : 'block';
-    
-            // Alterna o texto do botão "Mostrar/Ocultar Comentários"
-            toggleResponsesBtn.textContent = responsesContainer.style.display === 'none' 
-                ? 'Mostrar Comentários' 
-                : 'Ocultar Comentários';
-    
-            // Mover o botão "Excluir" para dentro ou fora do formulário
-            if (!isVisible) {
-                // Mover o botão "Excluir" para dentro do formulário, ao lado do botão "Enviar"
-                if (!formButtons.contains(deleteBtn)) {
-                    formButtons.appendChild(deleteBtn);
-                }
-            } else {
-                // Mover o botão "Excluir" para o lado do botão "Responder"
-                if (!buttonContainer.contains(deleteBtn)) {
-                    buttonContainer.appendChild(deleteBtn);
-                }
+            <div class="responses" id="responses-${index}" style="display: none;">
+                <p class="no-comments-message" style="display: none;">Este Post ainda não possui nenhum comentário.</p>
+            </div>
+            <div class="button-container">
+                <button class="reply-btn" data-index="${index}">Responder</button>
+                <button class="delete-btn" data-index="${index}">Excluir</button> <!-- Botão sempre criado -->
+            </div>
+            <div class="response-form-container" id="response-form-container-${index}" style="display: none;">
+                <form class="response-form" data-index="${index}">
+                    <input type="text" class="response-content" placeholder="Escreva uma resposta" required />
+                    <div class="form-buttons">
+                        <button type="submit">Enviar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    `;
+
+    // Oculta o botão "Excluir" caso o usuário não tenha permissão
+    const deleteBtn = post.querySelector('.delete-btn');
+    if (userName !== lastLoggedUser && lastAccess !== "admin") {
+        deleteBtn.style.display = "none"; // Esconde o botão
+    }
+
+    // Evento para exclusão do post
+    deleteBtn.addEventListener('click', () => {
+        deletePost(index);
+    });
+
+    // Eventos para resposta e mostrar/ocultar respostas (mantidos do código original)
+    const replyBtn = post.querySelector('.reply-btn');
+    const responseFormContainer = post.querySelector('.response-form-container');
+    const toggleResponsesBtn = post.querySelector('.toggle-responses-btn');
+    const responsesContainer = post.querySelector('.responses');
+    const noCommentsMessage = responsesContainer.querySelector('.no-comments-message');
+    const formButtons = responseFormContainer.querySelector('.form-buttons');
+
+    replyBtn.addEventListener('click', () => {
+        const isVisible = responseFormContainer.style.display === 'block';
+        responseFormContainer.style.display = isVisible ? 'none' : 'block';
+
+        toggleResponsesBtn.textContent = responsesContainer.style.display === 'none' 
+            ? 'Mostrar Comentários' 
+            : 'Ocultar Comentários';
+
+        if (!isVisible) {
+            if (!formButtons.contains(deleteBtn)) {
+                formButtons.appendChild(deleteBtn);
             }
-        });
-    
-        // Evento para mostrar/ocultar respostas
-        toggleResponsesBtn.addEventListener('click', () => {
-            const isVisible = responsesContainer.style.display === 'block';
-            responsesContainer.style.display = isVisible ? 'none' : 'block';
-            toggleResponsesBtn.textContent = isVisible ? 'Mostrar Comentários' : 'Ocultar Comentários';
-    
-            // Se não houver comentários, mostra a mensagem de "Este Post ainda não possui nenhum comentário"
-            if (responsesContainer.style.display === 'block' && !responsesContainer.querySelector('.response')) {
-                noCommentsMessage.style.display = 'block';
-            } else {
-                noCommentsMessage.style.display = 'none';
-            }
-        });
-    
-        // Evento de envio da resposta
-        const responseForm = responseFormContainer.querySelector('form');
-        responseForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-    
-            const responseContent = responseForm.querySelector('.response-content').value;
-            const responseUser = lastLoggedUser || 'Anônimo';
-    
-            addResponse(index, responseUser, responseContent); // Adiciona a resposta
-            responseForm.reset(); // Limpa o formulário
-            responseFormContainer.style.display = 'none'; // Oculta o formulário
-    
-            // Após responder, move o botão "Excluir" de volta ao lado do botão "Responder"
+        } else {
             const buttonContainer = post.querySelector('.button-container');
             if (!buttonContainer.contains(deleteBtn)) {
-                buttonContainer.appendChild(deleteBtn); // Move o botão "Excluir" para o lado de "Responder"
+                buttonContainer.appendChild(deleteBtn);
             }
-    
-            // Esconde a mensagem de "Nenhum comentário"
+        }
+    });
+
+    toggleResponsesBtn.addEventListener('click', () => {
+        const isVisible = responsesContainer.style.display === 'block';
+        responsesContainer.style.display = isVisible ? 'none' : 'block';
+        toggleResponsesBtn.textContent = isVisible ? 'Mostrar Comentários' : 'Ocultar Comentários';
+
+        if (responsesContainer.style.display === 'block' && !responsesContainer.querySelector('.response')) {
+            noCommentsMessage.style.display = 'block';
+        } else {
             noCommentsMessage.style.display = 'none';
-        });
-    
-        return post;
-    }
-    
+        }
+    });
+
+    const responseForm = responseFormContainer.querySelector('form');
+    responseForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const responseContent = responseForm.querySelector('.response-content').value;
+        const responseUser = lastLoggedUser || 'Anônimo';
+
+        addResponse(index, responseUser, responseContent);
+        responseForm.reset();
+        responseFormContainer.style.display = 'none';
+
+        const buttonContainer = post.querySelector('.button-container');
+        if (!buttonContainer.contains(deleteBtn)) {
+            buttonContainer.appendChild(deleteBtn);
+        }
+
+        noCommentsMessage.style.display = 'none';
+    });
+
+    return post;
+}
+
     // Função para adicionar uma resposta ao post e salvar no localStorage
     function addResponse(postIndex, userName, content) {
         const posts = JSON.parse(localStorage.getItem('posts')) || [];
